@@ -73,7 +73,7 @@ cd pve-kernel
 #  bypasses the process safely.
 # This curl skips certificate validation because Proxmox GIT WebUI doesn't send Let's Encrypt intermediate cert
 echo "Step 2.2: Downloading base kernel"
-curl -f -k "https://git.proxmox.com/?p=mirror_ubuntu-focal-kernel.git;a=snapshot;h=$(git submodule status submodules/ubuntu-focal | cut -c 2-41);sf=tgz" --output kernel.tgz || true
+curl -f -k "https://git.proxmox.com/?p=mirror_ubuntu-focal-kernel.git;a=snapshot;h=$(git submodule update --init --recursive --depth 1 | cut -c 2-41);sf=tgz" --output kernel.tgz || true
 
 if [[ -f "kernel.tgz" ]]; then
   tar -xf kernel.tgz -C submodules/ubuntu-focal/ --strip 1
